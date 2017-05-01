@@ -1,3 +1,3 @@
 # 3D-FirstPerson-Shooter-SuperHot-Reinterpretation
-A reinterpretation of the famous Indie game SuperHot, where time only moves when you do\n
-Developed in C++
+- A reinterpretation of the famous Indie game SuperHot, where time only moves when you do
+- Developed in C++ using Microsoft DirectX v11.0
