@@ -11,9 +11,10 @@ GameObject::GameObject()
 	m_shader = NULL;
 }
 
-GameObject::GameObject(Vector3 position)
+GameObject::GameObject(Vector3 position, AudioSystem* audio)
 {
 	m_position = position;
+	m_audio = audio;
 	m_rotX = m_rotY = m_rotZ = 0;
 	SetUniformScale(1.0f);
 	m_world = Matrix::Identity;
@@ -62,11 +63,23 @@ GameObject::GameObject(Mesh* mesh, Shader* shader, Texture* texture, Vector3 pos
 	m_shader = shader;
 }
 
+GameObject::GameObject(Mesh* mesh, Shader* shader, Texture* texture, Vector3 position, AudioSystem* audio)
+{
+	m_position = position;
+	m_rotX = m_rotY = m_rotZ = 0;
+	SetUniformScale(1.0f);
+	m_world = Matrix::Identity;
+	m_mesh = mesh;
+	m_texture = texture;
+	m_shader = shader;
+	m_audio = audio;
+}
+
 GameObject::~GameObject() {}
 
 void GameObject::Render(Direct3D* renderer, Camera* cam)
 {
-	if (m_mesh && visible)
+	if (m_mesh && visible) // Only render if it needs to be (visible)
 	{
 		// If creating these matrices every frame worries you, a "dirty" system like the camera uses could apply here too
 		m_world = Matrix::CreateScale(m_scaleX, m_scaleY, m_scaleZ) * Matrix::CreateFromYawPitchRoll(m_rotY, m_rotX, m_rotZ) * Matrix::CreateTranslation(m_position);

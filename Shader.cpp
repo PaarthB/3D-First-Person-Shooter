@@ -22,7 +22,7 @@ Shader::~Shader()
 bool Shader::Initialise(ID3D11Device* device, LPCWSTR vertexFilename, LPCWSTR pixelFilename)
 {
 	//This method loads and compiles the Vertex and Pixel shader code, sets up the vertex layout and creates a CPU accessable buffer to hold the matrices
-	
+
 	ID3DBlob* vertexShaderBlob = NULL;		//Compiled shader code is stored as a binary blob of data, this is for the vertex shader
 	ID3DBlob* pixelShaderBlob = NULL;		//and this one is for the pixel shader
 	ID3DBlob* errorBlob = NULL;				//Any compiler errors are stored in this blob, they will be a string which we can output if needed
@@ -31,7 +31,7 @@ bool Shader::Initialise(ID3D11Device* device, LPCWSTR vertexFilename, LPCWSTR pi
 	D3D11_INPUT_ELEMENT_DESC vertexLayout[numberOfVertexElements];	//Each element will have a Description struct which tells us how they should be layed out
 	D3D11_BUFFER_DESC matrixBufferDescription;						//We will also need to create a Description struct for the buffer we are creating for the matrices
 
-	//We use D3DCompileFromFile to compile the HLSL code for our shaders
+																	//We use D3DCompileFromFile to compile the HLSL code for our shaders
 	if (FAILED(D3DCompileFromFile(vertexFilename,	//The filename of the source code file
 		NULL,										//Any marco defines we want to include
 		D3D_COMPILE_STANDARD_FILE_INCLUDE,			//Here we can specify include files
@@ -172,7 +172,7 @@ bool Shader::Initialise(ID3D11Device* device, LPCWSTR vertexFilename, LPCWSTR pi
 	matrixBufferDescription.MiscFlags = 0;								//Misc flags
 	matrixBufferDescription.StructureByteStride = 0;					//Data offsets
 
-	//Create the buffer based on that description!
+																		//Create the buffer based on that description!
 	if (FAILED(device->CreateBuffer(&matrixBufferDescription, NULL, &m_matrixBuffer)))
 	{
 		return false;
@@ -232,7 +232,7 @@ bool Shader::SetMatrices(ID3D11DeviceContext* context, Matrix world, Matrix view
 	{
 		return false;
 	}
-	
+
 	inputData = (MatrixBuffer*)mappedResource.pData;	//The pData pointer in the Mapped Subresource points to the memory within the buffer, so we cast it to a MatrixBuffer
 
 	inputData->world = world.Transpose();				//and fill it out!

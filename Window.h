@@ -1,10 +1,10 @@
 /*	FIT2096 - Week 1 Example Code
- *	Window.h
- *	Created by Elliott Wilson - 2015 - Monash University
- *	This class represents a single Win32 window with a message pump
- *	and Window Procedure. It is also linked to the Direct 3D renderer
- *	which it uses to set the fill colour of the window.
- */
+*	Window.h
+*	Created by Elliott Wilson - 2015 - Monash University
+*	This class represents a single Win32 window with a message pump
+*	and Window Procedure. It is also linked to the Direct 3D renderer
+*	which it uses to set the fill colour of the window.
+*/
 
 #ifndef WINDOW_H
 #define WINDOW_H
@@ -24,12 +24,13 @@ private:
 	HWND m_windowHandle;	//The Handle to this window, whenever to ask the Windows API to do something to the window you will pass it this handle
 
 	Direct3D* m_renderer;	//The direct3D renderer class that we wrote, this will be used to set the background colour for our window.
+	AudioSystem* m_audio;
 	InputController* m_input;//The Input Controller is declared here. It will use the Window Proc to update it's state
 	Game* m_game;			//This is our Game object. Here we create, update and render all of our game objects/models
 
-	//These values are used to calculate the timestep, or the amount of time that has passed since the last frame
-	//The timestep means that we calculate movement/animation in real time and not frame by frame
-	//To work this value out we use the Performance Counter. 
+							//These values are used to calculate the timestep, or the amount of time that has passed since the last frame
+							//The timestep means that we calculate movement/animation in real time and not frame by frame
+							//To work this value out we use the Performance Counter. 
 	LARGE_INTEGER m_counterFrequency;	//The performance counter has a frequency which is basically the number counts per second
 	LARGE_INTEGER m_lastCount;			//This value will store where the counter was upto on the last frame
 
@@ -54,7 +55,7 @@ static LRESULT CALLBACK WindowProc(HWND, UINT, WPARAM, LPARAM);	//Here is our re
 																//use the pointer below to call the MessageProc function from our actual Window
 																//object.
 
-//Global Variables
+																//Global Variables
 static Window* g_window = 0;
 
 #endif

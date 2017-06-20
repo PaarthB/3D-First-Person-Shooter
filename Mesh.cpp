@@ -1,4 +1,4 @@
-	#include "Mesh.h"
+#include "Mesh.h"
 #include "MathsHelper.h"
 #include <fstream>
 
@@ -207,7 +207,7 @@ bool Mesh::InitialiseBuffers(Direct3D* renderer, Vertex* vertexData, unsigned lo
 	vertexBufferDescription.StructureByteStride = 0;
 
 	vertexDataDescription.pSysMem = vertexData;		//The most important piece of information for the data description struct is a pointer 
-	//to the system memory that we are coping into the buffer
+													//to the system memory that we are coping into the buffer
 	vertexDataDescription.SysMemPitch = 0;			//These values allow us to shift and offset the data but we won't be needing that!
 	vertexDataDescription.SysMemSlicePitch = 0;
 
@@ -256,7 +256,7 @@ bool Mesh::Load(Direct3D* renderer, const char* filename)
 	Vector3* normals;	//This array stores the raw normals from the OBJ file
 	Vector2* uvs;		//This array stores the raw texture coords from the OBJ file
 	Face* faces;		//This is an array of Face structs that collects the different 
-	//vert, normal and uv indices into a single place
+						//vert, normal and uv indices into a single place
 
 	int vertexCount = 0;	//We will work out the total number of verts in the file
 	int normalCount = 0;	//The total number of normals	
@@ -270,7 +270,7 @@ bool Mesh::Load(Direct3D* renderer, const char* filename)
 
 	ifstream fileIn;		//OBJ files are just text files so we use a simple input file stream
 
-	//The first read of the file is just to determine the number of verts, normals and uvs in the file
+							//The first read of the file is just to determine the number of verts, normals and uvs in the file
 	fileIn.open(filename);		//Open our OBJ file for reading
 
 	if (!fileIn.good())			//If we can't open it return false
@@ -302,7 +302,7 @@ bool Mesh::Load(Direct3D* renderer, const char* filename)
 	}
 	fileIn.close();		//After reading the counts we then close the file to reset it
 
-	//Now that we know how much memory to allocate we can read the Data from the OBJ file
+						//Now that we know how much memory to allocate we can read the Data from the OBJ file
 	fileIn.open(filename);
 	if (!fileIn.good())
 		return false;
@@ -344,9 +344,9 @@ bool Mesh::Load(Direct3D* renderer, const char* filename)
 		{
 			char junk;		//The face lines are in the format of "index/index/index" which means that the / chars are junk
 
-			//Here you can see us reading three verts worth of information for each face. When we expect a / char we put it into "junk"
-			//(NOTE: OBJ can support faces with more then 3 points, we only read for 3. This means that our models must be made up of
-			//		 only triangles (i.e. they must be "triangulated"))
+							//Here you can see us reading three verts worth of information for each face. When we expect a / char we put it into "junk"
+							//(NOTE: OBJ can support faces with more then 3 points, we only read for 3. This means that our models must be made up of
+							//		 only triangles (i.e. they must be "triangulated"))
 			fileIn >> faces[faceIndex].vert1 >> junk >> faces[faceIndex].uv1 >> junk >> faces[faceIndex].normal1
 				>> faces[faceIndex].vert2 >> junk >> faces[faceIndex].uv2 >> junk >> faces[faceIndex].normal2
 				>> faces[faceIndex].vert3 >> junk >> faces[faceIndex].uv3 >> junk >> faces[faceIndex].normal3;
@@ -360,7 +360,7 @@ bool Mesh::Load(Direct3D* renderer, const char* filename)
 	}
 	fileIn.close();		//Close the file, we are done with our file IO now
 
-	//Each face is made up of three verts so the total number of indices is 3 * the number of faces
+						//Each face is made up of three verts so the total number of indices is 3 * the number of faces
 	int indexCount = faceCount * 3;
 	//We will also allocate the same number of vertices
 	int finalVertexCount = faceCount * 3;

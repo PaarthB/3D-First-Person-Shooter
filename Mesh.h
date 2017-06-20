@@ -52,7 +52,7 @@ public:
 
 	int GetVertexCount() { return m_vertexCount; }
 	int GetIndexCount() { return m_indexCount; }
-	const char* GetFilename() { return m_filename; }	
+	const char* GetFilename() { return m_filename; }
 
 	Vector3 GetMin() { return m_minVector; }
 	Vector3 GetMax() { return m_maxVector; }

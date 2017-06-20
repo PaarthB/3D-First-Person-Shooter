@@ -4,6 +4,8 @@
 #include "Direct3D.h"
 #include "Mesh.h"
 #include "Collisions.h"
+#include "AudioClip.h"
+#include "AudioSystem.h"
 
 class GameObject
 {
@@ -16,14 +18,18 @@ protected:
 	Mesh* m_mesh;
 	Texture* m_texture;
 	Shader* m_shader;
+	AudioClip* m_engineSound;
+	AudioSystem* m_audio;
 
 public:
 	GameObject();
-	GameObject(Vector3 position);
+	GameObject(Vector3 position, AudioSystem* audio);
 	GameObject(Mesh* mesh, Shader* shader);
 	GameObject(Mesh* mesh, Shader* shader, Texture* texture);
 	GameObject(Mesh* mesh, Shader* shader, Vector3 position);
 	GameObject(Mesh* mesh, Shader* shader, Texture* texture, Vector3 position);
+	GameObject(Mesh* mesh, Shader* shader, Texture* texture, Vector3 position, AudioSystem* audio);
+
 	virtual ~GameObject();
 
 	// GameObject is now an abstract class as Update is pure virtual

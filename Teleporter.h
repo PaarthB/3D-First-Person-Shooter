@@ -5,20 +5,21 @@
 *
 *	Describes a Item Box class which represents different types of items/objects.
 */
-#ifndef ITEM_BOX_H
-#define ITEM_BOX_H
+#ifndef TELEPORTER_H
+#define TELEPORTER_H
 
 #include "GameObject.h"
-class ItemBox : public GameObject
+class Teleporter : public GameObject
 {
 private:
-	Vector3 m_pos;
+	Vector3 m_pos; // Player pos
 	CBoundingBox m_boundingBox; // Bounding box of the item to detect collisions
-	int level; // Floor at which it is situated
-	int teleporter; // The ID of the teleporter it is guarding
+	int level; // Which floor level does it transport to
+	int ID; //4: Dragon lair, 2-3: Egypt, 1: Frosty Caves
+
 
 public:
-	ItemBox(Mesh* mesh, Shader* shader, Texture* texture, Vector3 position);
+	Teleporter(Mesh* mesh, Shader* shader, Texture* texture, Vector3 position);
 
 	void Update(float timestep);
 
@@ -34,20 +35,12 @@ public:
 	void OnPlayerCollisionStay();
 	void OnPlayerCollisionExit();
 
-	void OnGrenadeCollisionEnter();
-	void OnGrenadeCollisionStay();
-	void OnGrenadeCollisionExit();
-
-	void OnBulletCollisionEnter();
-	void OnBulletCollisionStay();
-	void OnBulletCollisionExit();
-
 	//void setStatus(bool status) { visible = status; }
 	//bool getStatus() { return visible; }
 	void setLevel(int lev) { level = lev; }
 	int getLevel() { return level; }
-	void setTeleporter(int i) { teleporter = i; }
-	int getTeleporter() { return teleporter; }
+	void setID(int i) { ID = i; }
+	int getID() { return ID; }
 };
 
 #endif

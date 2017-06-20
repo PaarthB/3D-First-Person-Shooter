@@ -24,7 +24,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline,
 
 	CreateConsole();
 
-	Window* win = new Window("FIT2096 Game Programming 1: Assignment 2a", 1280, 720, true);	//We'll create our window object, set a size and if we want it fullscreen
+	Window* win = new Window("FIT2096 Game Programming 1: Assignment 2B", 1280, 720, true);	//We'll create our window object, set a size and if we want it fullscreen
 
 	if(win->Initialise())	//If the window initialises...
 	{

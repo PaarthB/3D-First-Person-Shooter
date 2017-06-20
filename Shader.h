@@ -40,7 +40,7 @@ public:
 	virtual bool Initialise(ID3D11Device* device, LPCWSTR vertexFilename, LPCWSTR pixelFilename);	//Initialises the shader, here we specify the file name of the 
 																									//vertex and pixel shader source code files
 	virtual void Release();		//Cleanup
-	
+
 	virtual void Begin(ID3D11DeviceContext* context);	//The begin method tells the device context to use the Shaders as the current rendering shaders
 
 	virtual bool SetMatrices(ID3D11DeviceContext* context, Matrix world, Matrix view, Matrix projection);	//This method copies the world, view, proj matrices 

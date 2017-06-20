@@ -1,8 +1,8 @@
 /*	FIT2096 - Week 1 Example Code
- *	Window.cpp
- *	Created by Elliott Wilson - 2015 - Monash University
- *	Implementation of Window.h
- */
+*	Window.cpp
+*	Created by Elliott Wilson - 2015 - Monash University
+*	Implementation of Window.h
+*/
 
 #include "Window.h"
 #include <iostream>
@@ -24,7 +24,7 @@ Window::Window(const char* windowName, int width, int height, bool fullscreen)
 Window::~Window()
 {
 	//When the window is destroyed we need to delete the Direct3D renderer
-	if(m_renderer)
+	if (m_renderer)
 	{
 		m_renderer->Shutdown();
 		delete m_renderer;
@@ -58,7 +58,7 @@ bool Window::Initialise()
 
 	RegisterClassEx(&windowClass);	//Once we have created our Window Class we register it with the OS. We can now create windows basic off this class!
 
-	if(m_fullscreen)
+	if (m_fullscreen)
 	{
 		//If we want a full screen window we have to create a new DEVMODE struct to change the screen display mode.
 		m_width = GetSystemMetrics(SM_CXSCREEN);	//First we need the Max width of the screen
@@ -86,26 +86,34 @@ bool Window::Initialise()
 	//After we have set the correct display settings and the window position we can then create the actual window!
 	//The CreateWindowEx method returns a HWND which is a Handle that we use to refer to our window.
 	m_windowHandle = CreateWindowEx(WS_EX_APPWINDOW,	//This is the extended window style, it allows us to define special functionality for the window, but we just want a simple app window
-									m_windowName,		//This is the name of the Window Class that we will use for this window, this must match the name of the class we register earlier
-									m_windowName,		//This is the title of the window, it appears in the title bar.
-									WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_OVERLAPPEDWINDOW,	//This is the window style, you can create interesting windows by ORing styles together
-																					//The WS_POPUP gives us a nice boarderless window but try changing it to WS_OVERLAPPEDWINDOW
-									posX, posY,			//Here we set the screen position of the Window
-									m_width, m_height,	//Here we set the width and height
-									NULL,				//Which window is the parent of this window? Noone!
-									NULL,				//Does this window have a menu bar? Nope!
-									m_hInstance,		//Which program does this Window belong to?
-									NULL);				//Extra data for things that beyond the scope of this unit
+		m_windowName,		//This is the name of the Window Class that we will use for this window, this must match the name of the class we register earlier
+		m_windowName,		//This is the title of the window, it appears in the title bar.
+		WS_CLIPSIBLINGS | WS_CLIPCHILDREN | WS_OVERLAPPEDWINDOW,	//This is the window style, you can create interesting windows by ORing styles together
+																	//The WS_POPUP gives us a nice boarderless window but try changing it to WS_OVERLAPPEDWINDOW
+		posX, posY,			//Here we set the screen position of the Window
+		m_width, m_height,	//Here we set the width and height
+		NULL,				//Which window is the parent of this window? Noone!
+		NULL,				//Does this window have a menu bar? Nope!
+		m_hInstance,		//Which program does this Window belong to?
+		NULL);				//Extra data for things that beyond the scope of this unit
 
 	ShowWindow(m_windowHandle, SW_SHOW);	//Display our newly create window!
 	SetForegroundWindow(m_windowHandle);	//Make sure it's in the foreground
 	SetFocus(m_windowHandle);				//Also make sure its the active window!
 
-	//ShowCursor(false);		//Do we want to see the cursor when we mouse over the window?
+											//ShowCursor(false);		//Do we want to see the cursor when we mouse over the window?
 
-	//We create our 3D renderer and initialise it 
+											//We create our 3D renderer and initialise it 
 	m_renderer = new Direct3D();
-	if(!m_renderer->Initialise(m_width, m_height, m_windowHandle, m_fullscreen, false))
+	if (!m_renderer->Initialise(m_width, m_height, m_windowHandle, true, false))
+	{
+		ShowCursor(true);
+		return false;
+	}
+
+	//Create our AudioSystem which will be passed into Game
+	m_audio = new AudioSystem();
+	if (!m_audio->Initialise())
 	{
 		ShowCursor(true);
 		return false;
@@ -116,13 +124,26 @@ bool Window::Initialise()
 
 	//We create our Game object and initialise it
 	m_game = new Game();
-	if (!m_game->Initialise(m_renderer, m_input))
+	if (!m_game->Initialise(m_renderer, m_audio, m_input))
 	{
 		ShowCursor(true);
 		return false;
 	}
 
 	return true;
+
+	//Create an Input Controller
+	/*m_input = new InputController(m_windowHandle);
+
+	//We create our Game object and initialise it
+	m_game = new Game();
+	if (!m_game->Initialise(m_renderer, m_input))
+	{
+	ShowCursor(true);
+	return false;
+	}
+
+	return true;*/
 }
 
 void Window::Start()
@@ -202,7 +223,7 @@ void Window::Shutdown()
 {
 	ShowCursor(true);	//When we shutdown we want to make sure the cursor comes back
 
-	if(m_fullscreen)
+	if (m_fullscreen)
 	{
 		ChangeDisplaySettings(NULL, 0);	//If we were fullscreen we need to go back to the default display settings
 	}
@@ -227,10 +248,10 @@ void Window::Shutdown()
 		m_input = NULL;
 	}
 
-	DestroyWindow(m_windowHandle);		
+	DestroyWindow(m_windowHandle);
 	m_windowHandle = NULL;
 
-	UnregisterClass(m_windowName, m_hInstance);	
+	UnregisterClass(m_windowName, m_hInstance);
 	m_hInstance = NULL;
 
 	g_window = NULL;
@@ -239,7 +260,7 @@ void Window::Shutdown()
 LRESULT CALLBACK Window::MessageProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
 	//This is the message procedure within the window class. The Global Window Procedure passes most of the messages it recieved into here
-	switch(message)
+	switch (message)
 	{
 	case WM_KEYDOWN:
 		m_input->SetKeyDown(wParam);

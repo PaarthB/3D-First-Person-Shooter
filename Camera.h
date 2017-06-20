@@ -41,12 +41,13 @@ public:
 	Camera(Vector3 pos, Vector3 lookAt, Vector3 up, float aspect, float fov, float nearClip, float farClip);	//Parameter Constructor
 	~Camera();	//Destructor
 
-	//Mutators
+				//Mutators
 	void SetPosition(Vector3 pos);
 	void SetLookAt(Vector3 lookAt);
 	void SetUp(Vector3 up);
 
 	void SetAspectRatio(float aspect);
+	float GetAspectRatio() { return m_aspectRatio; }
 	void SetFieldOfView(float fov);
 	void SetNearClip(float nearClip);
 	void SetFarClip(float farClip);
