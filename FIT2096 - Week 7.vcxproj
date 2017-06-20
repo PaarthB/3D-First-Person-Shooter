@@ -45,9 +45,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(ProjectDir)\FMOD\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(ProjectDir)\FMOD\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>fmod_vc.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -65,6 +68,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioClip.cpp" />
+    <ClCompile Include="AudioSystem.cpp" />
+    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Grenade.cpp" />
+    <ClCompile Include="ItemObject.cpp" />
     <ClCompile Include="PersonObject.cpp" />
     <ClCompile Include="FirstPersonCamera.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -83,6 +91,7 @@
     <ClCompile Include="MeshManager.cpp" />
     <ClCompile Include="PhysicsObject.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="Teleporter.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TexturedShader.cpp" />
     <ClCompile Include="TextureManager.cpp" />
@@ -90,6 +99,11 @@
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioClip.h" />
+    <ClInclude Include="AudioSystem.h" />
+    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Grenade.h" />
+    <ClInclude Include="ItemObject.h" />
     <ClInclude Include="PersonObject.h" />
     <ClInclude Include="FirstPersonCamera.h" />
     <ClInclude Include="Button.h" />
@@ -113,7 +127,9 @@
     <ClInclude Include="MeshManager.h" />
     <ClInclude Include="PhysicsObject.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="StaticObject.h" />
+    <ClInclude Include="Teleporter.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TexturedShader.h" />
     <ClInclude Include="TextureManager.h" />
