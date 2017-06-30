@@ -16,5 +16,6 @@
   - Night Vision
   - Aim and shoot
   - Direction Compass
-
+# Usage:
+Just run the application in MS Visual Studio 2015 or later. It runs full screen.
 ![Image](/game.png?raw=true "3D First Person Shooter Super Hot v2.0")
