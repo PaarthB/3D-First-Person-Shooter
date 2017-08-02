@@ -15,8 +15,8 @@
 - Future Additions:
   - Night Vision
   - Aim and shoot
-  - Direction Compass
-
+  - Direction Compass (would requires animated sprite, rotating by angle between player and ruby) 
+  
 ![Image](/game.png?raw=true "3D First Person Shooter Super Hot v2.0")
 
 # Usage:
