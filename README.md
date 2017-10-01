@@ -27,3 +27,4 @@ This app contain some really important things implemented within it.
 - It has a simple mechanism to make the AI (Enemies and their bullets) face the player. It is contained in the method ```RotateToFace``` within PersonObject.cpp. 
 - It has important implementation of time dilation, object teleportation and player teleportation.
 - It has within it implemented a Finite State Machine (FSM) for handling game all 5 game states.
+- Yaw Pitch Roll transformation in GameObject.cpp is to evaluate each objects rotation matrix or rotation amount in the view matrix.
