@@ -21,6 +21,7 @@
 
 # Usage:
 Just run the application in MS Visual Studio 2015 or later. It runs full screen.
+Needs FMOD Sound engine for sound.
 
 # Important things:
 This app contain some really important things implemented within it. 
